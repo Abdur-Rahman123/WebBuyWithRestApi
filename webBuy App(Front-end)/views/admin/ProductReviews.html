@@ -1,0 +1,36 @@
+﻿<div class="d-flex justify-content-between">
+    <h5>Product Reviews</h5>
+    <div class="form-group row col-md-4">
+        <label class="col-form-label mr-3">Rating Order: </label>
+        <select id="orderBy" class="form-control form-control-sm w-50 mt-1" name="orderBy">
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+    </div>
+</div>
+<table class="table table-hover table-dark">
+    <thead class="">
+        <tr>
+            <th scope="col">#ProductId</th>
+            <th scope="col">Product</th>
+            <th scope="col">Review</th>
+            <th scope="col">Rating</th>
+            <th scope="col">UserId</th>
+            <th scope="col">Shop</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+    
+    </tbody>
+</table>
+
+<script type="text/javascript" src="../../js/admin/productReviews.js"></script>
+<script type="text/javascript" src="../../js/admin/getProductDetailsWithCategoryShopName.js"></script>
+
+<script>
+     // details
+    function sendUrlId(id){
+        urlId(id);
+    }
+</script>

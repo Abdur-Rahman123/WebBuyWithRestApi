@@ -1,0 +1,118 @@
+﻿
+<h5>Users</h5>
+
+<p class="mb-2 float-right h6">
+    <a href="#" id='viewAllUsers' class="mx-2"><i class="fas fa-users"></i> All Users</a> |
+    <a href="#" id='viewBannedUsers' class="mx-2"><i class="fas fa-user-slash"></i> Banned Users</a>
+</p>
+<table class="table table-hover table-dark">
+    <thead>
+    <tr>
+        <th scope="col">
+            Email
+        </th>
+        <th scope="col">
+            Name
+        </th>
+        <th scope="col">
+            Phone
+        </th>
+        <th scope="col">
+            Address
+        </th>
+        <th scope="col">
+            Role
+        </th>
+        <th scope="col">
+            Status
+        </th>
+        <th scope="col"> 
+            Action
+        </th>
+    </tr>
+</thead>
+
+    <tbody id="tbody">
+    </tbody>
+
+</table>
+
+
+<script type="text/javascript">
+    function banUser(id){
+        $.ajax({
+            url:"http://localhost:59162/api/admin/BanUser/"+id+"",
+            method:"put",
+            data:{
+            },
+            complete:(xmlHttp,status)=>{
+                if(xmlHttp.status==200)
+                {
+                    $("#title").html("All Users");
+                    $("#body").load("../admin/Users.html");
+                    $('<script>').attr({
+                        src: '../../js/admin/getAllUsers.js',
+                        type: 'text/javascript'}).appendTo('body');
+
+                    $("#error-msg").addClass("alert-warning");
+                    $("#error-msg").html(" User Banned");
+                }
+                else
+                {
+                    $("#error-msg").addClass("alert-warning");
+                    $("#error-msg").html(xmlHttp.status+":"+xmlHttp.statusText);
+                }
+            }
+        });    
+    };
+
+
+    function unbanUser(id){
+        $.ajax({
+            url:"http://localhost:59162/api/admin/UnbanUser/"+id+"",
+            method:"put",
+            data:{
+            },
+            complete:(xmlHttp,status)=>{
+                if(xmlHttp.status==200)
+                {
+                    $("#title").html("All Users");
+                    $("#body").load("../admin/Users.html");
+                    $('<script>').attr({
+                        src: '../../js/admin/getAllUsers.js',
+                        type: 'text/javascript'}).appendTo('body');
+                        
+                    $("#error-msg").addClass("alert-success");
+                    $("#error-msg").html("User unbaned");
+                }
+                else
+                {
+                    $("#error-msg").addClass("alert-warning");
+                    $("#error-msg").html(xmlHttp.status+":"+xmlHttp.statusText);
+                }
+            }
+        });        
+    };
+
+
+
+
+    // 
+    $(document).ready(function(){
+        $("#viewBannedUsers").click(()=>{
+                $("#title").html("Banned Users");
+                $("#body").load("../admin/Users.html");
+                $('<script>').attr({
+                    src: '../../js/admin/getBannedUsers.js',
+                    type: 'text/javascript'}).appendTo('body');
+        });
+        $("#viewAllUsers").click(()=>{
+                $("#title").html("All Users");
+                $("#body").load("../admin/Users.html");
+                $('<script>').attr({
+                    src: '../../js/admin/getAllUsers.js',
+                    type: 'text/javascript'}).appendTo('body');
+        });
+    });
+    // 
+</script>
